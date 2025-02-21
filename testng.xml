@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="Regression Suite">
+        <classes>
+            <class name="com.regression.UserTest">
+<!--                <methods>-->
+<!--                    <include name="createUser"/>-->
+<!--                </methods>-->
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="/Users/krishnasaahiyavana/git/restassured-hybrid/src/test/java/com/datadriven/UserDDT.java">
+        <classes>
+            <class name="com.datadriven.UserDDT">
+<!--                <methods>-->
+<!--                    <include name="ddt"/>-->
+<!--                    <include name="ddt2"/>-->
+<!--                </methods>-->
+            </class>
+        </classes>
+    </test>
+</suite>

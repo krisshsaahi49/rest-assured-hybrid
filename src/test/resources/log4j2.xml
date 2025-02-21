@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config http://logging.apache.org/log4j/2.0/config/log4j-config-2.xsd">
+
+    <Appenders>
+
+        <!-- Console Appender: Logs warnings and errors to console -->
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </Console>
+
+        <!-- JSON Log File Appender -->
+        <File name="JsonFileAppender" fileName="logs/main.json">
+            <JsonLayout compact="true" eventEol="true"/>
+        </File>
+
+        <!-- Debug Log File Appender -->
+        <File name="DebugFileAppender" fileName="logs/debug.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
+
+        <!-- Rolling File Appender: Creates new files when size limit is reached -->
+        <RollingFile name="RollingFileAppender" fileName="logs/app.log"
+                     filePattern="logs/app-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>  <!-- Roll when file size exceeds 10MB -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>  <!-- Keep last 5 log files -->
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <!-- Root Logger: Default logging level -->
+        <Root level="INFO">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="JsonFileAppender"/>
+            <AppenderRef ref="RollingFileAppender"/>
+        </Root>
+
+        <!-- Logger for Debug Level (for specific package) -->
+        <Logger name="com.example" level="DEBUG" additivity="false">
+            <AppenderRef ref="DebugFileAppender"/>
+        </Logger>
+    </Loggers>
+
+</Configuration>
