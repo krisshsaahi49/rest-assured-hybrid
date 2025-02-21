@@ -1,7 +1,3 @@
-Below is your updated **README.md** file that now includes a Dockerfile section along with all the project details:
-
----
-
 # API Testing Framework for Swagger User Endpoints
 
 This project is a REST API testing framework built with Java. It uses several libraries and tools to perform comprehensive API testing, including:
