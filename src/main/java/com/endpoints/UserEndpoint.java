@@ -1,6 +1,8 @@
 package com.endpoints;
 
 import com.dto.User;
+import com.util.ExtentReportUtil;
+import com.util.LogUtil;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -17,6 +19,8 @@ public class UserEndpoint {
                     .body(user)
                     .when()
                     .post(Routes.POST_USER);
+            ExtentReportUtil.getInstance().extentPass(response.asPrettyString());
+            LogUtil.getInstance().logInfo(response.asPrettyString());
             return response;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -30,6 +34,8 @@ public class UserEndpoint {
                     .pathParams("username", username )
                     .when()
                     .get(Routes.GET_USER);
+            ExtentReportUtil.getInstance().extentPass(response.asPrettyString());
+            LogUtil.getInstance().logInfo(response.asPrettyString());
             return response;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -37,19 +43,35 @@ public class UserEndpoint {
     }
 
     public static Response updateUser(User user, String username){
-        return given().
-                accept(ContentType.JSON)
-                .contentType(ContentType.JSON)
-                .pathParams("username", username )
-                .body(user)
-                .when()
-                .put(Routes.UPDATE_USER);
+        Response response = null;
+        try {
+            response= given().
+                    accept(ContentType.JSON)
+                    .contentType(ContentType.JSON)
+                    .pathParams("username", username )
+                    .body(user)
+                    .when()
+                    .put(Routes.UPDATE_USER);
+            ExtentReportUtil.getInstance().extentPass(response.asPrettyString());
+            LogUtil.getInstance().logInfo(response.asPrettyString());
+            return response;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     public static Response deleteUser(String username){
-        return given().
-                pathParams("username", username)
-                .when()
-                .delete(Routes.DELETE_USER);
+        Response response=null;
+        try {
+            response = given().
+                    pathParams("username", username)
+                    .when()
+                    .delete(Routes.DELETE_USER);
+            ExtentReportUtil.getInstance().extentPass(response.asPrettyString());
+            LogUtil.getInstance().logInfo(response.asPrettyString());
+            return response;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
