@@ -82,9 +82,6 @@ The project is managed using Maven. The **pom.xml** file includes all the necess
 - **Plugins:**
     - **Maven Compiler Plugin:** Configured to use Java 17 and set up the Lombok annotation processor.
     - **Maven Surefire Plugin:** Configured to run TestNG tests using a specified suite XML file.
-
-For further details, refer to the [pom.xml file](citeturn1file0).
-
 ---
 
 ## Prerequisites
